@@ -12,9 +12,9 @@ const Home = ({ posts }) => {
         return (
           <div key={post.id} className="post-home">
             <Link to={`/post/${post.id}`}>
-              <h2 className="post-titulo">{post.titulo}</h2>{' '}
+              <h2 className="post-titulo">{post.titulo}</h2>
+              <p className="post-conteudo">{post.conteudo}</p>
             </Link>
-            <p className="post-conteudo">{post.conteudo}</p>
           </div>
         );
       })}
