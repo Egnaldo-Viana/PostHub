@@ -1,0 +1,20 @@
+*{
+  box-sizing: border-box;
+  padding:0;
+  margin: 0;
+}
+
+.post{
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  margin: 20px 40px;
+  border: 2px solid #888;
+  padding: 20px;
+}
+
+.container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

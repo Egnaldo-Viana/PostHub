@@ -32,12 +32,12 @@ header a {
   color: #f8fafc;
   font-weight: 500;
   padding: 8px 16px;
-   border-radius: 4px; 
+  border-radius: 4px; 
   transition: all 0.3s ease;
 }
 
 header a:hover{
   color: #38bdf8;
-  background-color: rgba(56, 189, 248, 0.1)
+  background-color: rgba(56, 189, 248, 0.1);
 }
 
