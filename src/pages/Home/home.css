@@ -1,7 +1,7 @@
 body{
   height: 100%;
   margin: 0;
-  background-color: #f9fafb; /* aplica fundo no body */
+  background-color: #f9fafb; 
 }
 
 .conteiner-post{
@@ -17,7 +17,6 @@ body{
   border-radius: 8px;
   box-shadow:  2px 2px 6px rgba(0,0,0,0.1);     
   min-width: 300px;
-
 }
 
 a{
@@ -35,7 +34,6 @@ a{
   color: #111;
   border: 1px solid #ccc;
   border-radius: 8px;
- 
 }
 
 
