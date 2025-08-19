@@ -1,26 +1,23 @@
-*{
-  box-sizing: border-box;
-  padding:0;
-  margin: 0;
-}
-.container{
+.login-container{
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.post{
+.login-form{
   display: flex;
   flex-direction: column;
-  width: 600px;
+  width: 300px;
   margin: 20px 40px;
   border: 1px solid #888;
   border-radius: 8px;
   padding: 20px;
 }
 
-.post input, textarea{
+.login-form input, button{
   margin-bottom: 20px;
 }
 
-
+.login-form p{
+  text-align: center;
+}

@@ -53,7 +53,7 @@ const CriarPost = () => {
           onChange={(event) => setAutor(event.target.value)}
           required
         />
-        <br />
+
         <label>Título:</label>
         <input
           type="text"
@@ -62,7 +62,7 @@ const CriarPost = () => {
           onChange={(event) => setTitulo(event.target.value)}
           required
         />
-        <br />
+
         <label> Resumo: </label>
         <textarea
           placeholder="Digite o resumo do post"
@@ -70,7 +70,6 @@ const CriarPost = () => {
           onChange={(event) => setResumo(event.target.value)}
           required
         />
-        <br />
         <label> Conteúdo: </label>
         <textarea
           placeholder="Digite o conteúdo do post"
@@ -78,7 +77,6 @@ const CriarPost = () => {
           onChange={(event) => setConteudo(event.target.value)}
           required
         />
-        <br />
         <button type="submit">Salvar</button>
       </form>
     </div>
