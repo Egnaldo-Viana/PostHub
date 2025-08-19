@@ -6,6 +6,8 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import CriarPost from './pages/CriarPost';
 import DetalhePost from './pages/DetalhePost';
+import Cadastro from './pages/Cadastro';
+
 import Erro from './pages/Erro';
 
 import Header from './components/Header';
@@ -17,6 +19,7 @@ const RoutesApp = ({ posts, addPost }) => {
       <Routes>
         <Route path="/" element={<Home posts={posts} />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/cadastro" element={<Cadastro />} />
         <Route path="/novo-post" element={<CriarPost addPost={addPost} />} />
         <Route path="/post/:id" element={<DetalhePost />} />
         <Route path="*" element={<Erro />} />

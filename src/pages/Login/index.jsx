@@ -18,7 +18,6 @@ const Login = () => {
     await signInWithEmailAndPassword(auth, email, senha)
       .then(() => {
         navegacao('/');
-        console.log('funcionou');
       })
       .catch(() => {
         alert('Erro ao fazer login');
@@ -29,16 +28,13 @@ const Login = () => {
     <div className="login-container">
       <form onSubmit={logarUsuario} className="login-form">
         <label> Email:</label>
-
         <input
           type="text"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-
         <label>Senha:</label>
-
         <input
           type="password"
           value={senha}
