@@ -35,6 +35,7 @@ a{
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
   padding: 20px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 600px;
 }
 
 .post-home{
@@ -61,7 +62,7 @@ a{
   font-size: 16px;
   text-align: justify;
   margin-bottom: 16px;
-   white-space: pre-wrap;
+  white-space: pre-wrap;
 }
 
 /* Botoes gerais */
@@ -119,6 +120,7 @@ form.post, form.login-form{
 .detalhe-conteudo article{
   margin-bottom: 12px;
   text-align: justify;
+  margin-top: 20px;
 }
 
 .detalhe-button div{
