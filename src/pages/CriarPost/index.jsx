@@ -1,20 +1,11 @@
 import React from 'react';
-import './criarPost.css';
 import { useNavigate } from 'react-router-dom';
-import { db } from '../../firebaseConnection';
+import { db, auth } from '../../firebaseConnection';
 import { addDoc, collection } from 'firebase/firestore';
 
-// Página Criar Post (/novo-post)
+import '../../app.css';
 
-// Um formulário com campos Título e Conteúdo (e opcionalmente Data).
-// Um botão para salvar o post.
-// Ao salvar, o post deve ser adicionado no seu estado global (ou Firestore, se já quiser integrar).
-// Depois do cadastro, você pode redirecionar para a Home ou limpar os campos para cadastrar outro.
-
-// Recebe a função addPost via props, que vem do componente pai (App).
-// Essa função adiciona o novo post no estado global de posts.
 const CriarPost = () => {
-  const [autor, setAutor] = React.useState('');
   const [titulo, setTitulo] = React.useState('');
   const [conteudo, setConteudo] = React.useState('');
   const [resumo, setResumo] = React.useState('');
@@ -23,14 +14,23 @@ const CriarPost = () => {
 
   async function salvarPost(event) {
     event.preventDefault();
+
+    if (!auth.currentUser) {
+      alert('Você precisa estar logado para criar um post.');
+      navegacao('/login');
+      return;
+    }
+
     await addDoc(collection(db, 'posts'), {
-      autor: autor,
-      titulo: titulo,
-      conteudo: conteudo,
-      resumo: resumo,
+      autor: {
+        id: auth.currentUser.uid,
+        nome: auth.currentUser.displayName || auth.currentUser.email,
+      },
+      titulo,
+      resumo,
+      conteudo,
     })
       .then(() => {
-        setAutor('');
         setTitulo('');
         setConteudo('');
         setResumo('');
@@ -38,22 +38,12 @@ const CriarPost = () => {
       })
       .catch((error) => {
         alert('ocorreu um erro ao criar post ');
-        navegacao('/');
       });
   }
 
   return (
     <div className="container">
       <form onSubmit={salvarPost} className="post">
-        <label>Autor:</label>
-        <input
-          type="text"
-          placeholder="Digite seu nome"
-          value={autor}
-          onChange={(event) => setAutor(event.target.value)}
-          required
-        />
-
         <label>Título:</label>
         <input
           type="text"

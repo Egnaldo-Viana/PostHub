@@ -1,12 +1,10 @@
-// Página Detalhes do Post (/post/:id)
-// Exibe título, autor e conteúdo.
-// Se o usuário logado for o autor, mostra botões para editar ou excluir o post.
 import React from 'react';
-import './detalhe.css';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { db, auth } from '../../firebaseConnection';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, deleteDoc } from 'firebase/firestore';
+
+import '../../app.css';
 
 const DetalhePost = () => {
   const { id } = useParams();
@@ -48,6 +46,16 @@ const DetalhePost = () => {
   const usuarioLogado = auth.currentUser;
   const donoPost = usuarioLogado && usuarioLogado.uid === post.autor.id;
 
+  async function excluirPost() {
+    try {
+      await deleteDoc(doc(db, 'posts', id));
+      alert('Post excluído com sucesso!');
+      window.location.href = '/'; // ou useNavigate()
+    } catch (e) {
+      alert('Erro ao excluir post');
+    }
+  }
+
   return (
     <div className="detalhe-container">
       <div className="detalhe-post">
@@ -57,17 +65,23 @@ const DetalhePost = () => {
         </div>
         <div className="detalhe-conteudo">
           <article>{post.conteudo}</article>
-          <h3>Autor: {post.autor}</h3>
+          <h3>Autor: {post.autor.nome}</h3>
           <div className="detalhe-button">
             {donoPost ? (
               <div>
-                <Link to="/">Voltar para Home</Link>
-                <Link to="">Editar Post</Link>
-                <Link to="">Excluir Post</Link>
+                <Link to="/" className="ver-mais">
+                  Voltar para Home
+                </Link>
+                <Link to={`/editar/${id}`} className="ver-mais">
+                  Editar Post
+                </Link>
+                <button onClick={excluirPost}>Excluir Post</button>
               </div>
             ) : (
               <div>
-                <Link to="/">Voltar para Home</Link>
+                <Link to="/" className="ver-mais">
+                  Voltar para Home
+                </Link>
               </div>
             )}
           </div>

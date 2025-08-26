@@ -1,8 +1,9 @@
 import React from 'react';
 
-import { auth } from '../../firebaseConnection';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext';
+
+import '../../app.css';
 
 const Cadastro = () => {
   const [email, setEmail] = React.useState('');
@@ -10,25 +11,27 @@ const Cadastro = () => {
 
   const navegacao = useNavigate();
 
+  const { cadastro } = React.useContext(AuthContext);
+
   async function cadastroUsuario(event) {
     event.preventDefault();
-    await createUserWithEmailAndPassword(auth, email, senha)
-      .then(() => {
-        navegacao('/login');
-        setEmail('');
-        setSenha('');
-      })
-      .catch((error) => {
-        if (error.code === 'auth/email-already-in-use') {
-          alert('Este e-mail já está em uso. Por favor, use outro.');
-        } else if (error.code === 'auth/invalid-email') {
-          alert('Formato de e-mail inválido.');
-        } else if (error.code === 'auth/weak-password') {
-          alert('A senha deve ter pelo menos 6 caracteres.');
-        } else {
-          alert('Ocorreu um erro inesperado. Tente novamente mais tarde.');
-        }
-      });
+
+    try {
+      await cadastro(email, senha);
+      navegacao('/login');
+      setEmail('');
+      setSenha('');
+    } catch (error) {
+      if (error.code === 'auth/email-already-in-use') {
+        alert('Este e-mail já está em uso. Por favor, use outro.');
+      } else if (error.code === 'auth/invalid-email') {
+        alert('Formato de e-mail inválido.');
+      } else if (error.code === 'auth/weak-password') {
+        alert('A senha deve ter pelo menos 6 caracteres.');
+      } else {
+        alert('Ocorreu um erro inesperado. Tente novamente mais tarde.');
+      }
+    }
   }
 
   return (

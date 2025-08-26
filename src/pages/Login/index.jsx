@@ -1,11 +1,8 @@
-// Página Cadastro de Usuário / Login
-// - Formulários para criar conta e fazer login usando Firebase Auth.
-// - Após login, mostrar boas-vindas com email do usuário e botão para logout.
-import React from 'react';
-import './login.css';
+import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { db, auth } from '../../firebaseConnection';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { AuthContext } from '../../contexts/AuthContext'; // aqui estou importando o contexto de autenticacao
+
+import '../../app.css';
 
 const Login = () => {
   const [email, setEmail] = React.useState('');
@@ -13,15 +10,17 @@ const Login = () => {
 
   const navegacao = useNavigate();
 
+  const { login } = useContext(AuthContext);
+
   async function logarUsuario(event) {
     event.preventDefault();
-    await signInWithEmailAndPassword(auth, email, senha)
-      .then(() => {
-        navegacao('/');
-      })
-      .catch(() => {
-        alert('Erro ao fazer login');
-      });
+
+    try {
+      await login(email, senha); // aqui chama a funcao do contexto
+      navegacao('/');
+    } catch (error) {
+      alert('Erro ao fazer login: ' + error.message);
+    }
   }
 
   return (
@@ -29,7 +28,7 @@ const Login = () => {
       <form onSubmit={logarUsuario} className="login-form">
         <label> Email:</label>
         <input
-          type="text"
+          type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
@@ -44,7 +43,10 @@ const Login = () => {
 
         <button>Entrar</button>
         <p>
-          Não tem uma conta? <Link to="/cadastro">Cadastre-se</Link>
+          Não tem uma conta?{' '}
+          <Link to="/cadastro" className="cadastre">
+            Cadastre-se
+          </Link>
         </p>
       </form>
     </div>

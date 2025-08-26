@@ -1,16 +1,13 @@
-// Página Home
-// - Lista pública de todos os posts, mostrando título, autor e data.
-// - Cada título é clicável e leva para a página de detalhes do post.
-
 import React from 'react';
-import { Link } from 'react-router-dom';
-import './home.css';
+import { useNavigate } from 'react-router-dom';
+import '../../app.css';
 
 import { db } from '../../firebaseConnection';
 import { collection, onSnapshot } from 'firebase/firestore';
 
 const Home = () => {
   const [posts, setPosts] = React.useState([]);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     const unsub = onSnapshot(collection(db, 'posts'), (snapshot) => {
@@ -29,17 +26,19 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="conteiner-post">
-      {posts.map((post) => {
-        return (
-          <Link to={`/post/${post.id}`} key={post.id}>
-            <div className="post-home">
-              <h2 className="post-titulo">{post.titulo}</h2>
-              <p className="post-conteudo">{post.resumo}</p>
-            </div>
-          </Link>
-        );
-      })}
+    <div className="container-post">
+      {posts.map((post) => (
+        <div className="post-home" key={post.id}>
+          <h2 className="post-titulo">{post.titulo}</h2>
+          <p className="post-conteudo">{post.resumo}</p>
+          <button
+            className="ver-mais"
+            onClick={() => navigate(`/post/${post.id}`)}
+          >
+            Ver matéria completa
+          </button>
+        </div>
+      ))}
     </div>
   );
 };
