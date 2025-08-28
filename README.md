@@ -1,12 +1,29 @@
-# React + Vite
+# PostHub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Projeto pessoal criado para praticar **React + Firebase** com foco em **Front-End**. É um CRUD de posts onde usuários podem se cadastrar, logar e gerenciar suas próprias publicações.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tecnologias
+- **React.js** – Interface e gerenciamento de estado.  
+- **Firebase** – Firestore para posts e Authentication para login/cadastro.  
+- **HTML5 & CSS3** – Estrutura e estilo responsivo, usando Flexbox e Grid.  
+- **React Router** – Navegação entre páginas e rotas privadas.  
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Funcionalidades
+- **CRUD completo de posts** – Apenas usuários logados podem criar, editar ou excluir seus posts.  
+- **Home pública** – Lista de posts com título, resumo e botão “Ver matéria completa”.  
+- **Detalhe do Post** – Conteúdo completo; edição/exclusão apenas pelo autor.  
+- **Formulários com validação** – Criação e edição segura de posts.  
+- **Autenticação de usuários** – Login e cadastro via Firebase Authentication.  
+- **UI/UX responsivo** – Layout moderno, cores consistentes, efeitos de hover e transições suaves.  
+
+---
+
+## Estrutura
+- **Home** – Lista de posts.  
+- **Detalhe do Post** – Página de conteúdo completo do post.  
+- **Criar / Editar Post** – Formulários para gerenciamento de posts.  
+- **Login / Cadastro** – Autenticação e controle de permissões. 
